@@ -15,29 +15,35 @@ class WeatherController extends GetxController {
 
   final String _apiKey = '0cec6d7096cce671bea2d7242ccd0ed5';
 
-  Future<void> fetchWeather(String city) async {
-    isLoading.value = true;
-    errorMessage.value = '';
+  Future<void> fetchWeather(String city,context) async {
+    if(cityController.text.isNotEmpty){
+      isLoading.value = true;
+      errorMessage.value = '';
 
-    final url =
-        'https://api.openweathermap.org/data/2.5/weather?q=$city&appid=$_apiKey&units=metric';
+      final url =
+          'https://api.openweathermap.org/data/2.5/weather?q=$city&appid=$_apiKey&units=metric';
 
-    try {
-      final response = await http.get(Uri.parse(url));
-      if (response.statusCode == 200) {
-        final data = json.decode(response.body);
-        cityName.value = data['name'];
-        temperature.value = '${data['main']['temp']} °C';
-        description.value = data['weather'][0]['description'];
-        iconCode.value = data['weather'][0]['icon'];
-      } else {
-        errorMessage.value = 'City not found. Please try again.';
+      try {
+        final response = await http.get(Uri.parse(url));
+        if (response.statusCode == 200) {
+          final data = json.decode(response.body);
+          cityName.value = data['name'];
+          temperature.value = '${data['main']['temp']} °C';
+          description.value = data['weather'][0]['description'];
+          iconCode.value = data['weather'][0]['icon'];
+        } else {
+          errorMessage.value = 'City not found. Please try again.';
+        }
+      } catch (e) {
+        errorMessage.value =
+            'Failed to fetch data. Please check your internet connection.';
+      } finally {
+        isLoading.value = false;
       }
-    } catch (e) {
-      errorMessage.value =
-          'Failed to fetch data. Please check your internet connection.';
-    } finally {
-      isLoading.value = false;
+    }else{
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Enter Location',style: TextStyle(color: Colors.white)),backgroundColor: Colors.red,behavior: SnackBarBehavior.floating,)
+      );
     }
   }
 

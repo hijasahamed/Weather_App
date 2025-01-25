@@ -44,7 +44,7 @@ class WeatherScreenElements extends StatelessWidget {
             ElevatedButton(
               onPressed: () {
                 weatherController
-                    .fetchWeather(weatherController.cityController.text.trim());
+                    .fetchWeather(weatherController.cityController.text.trim(),context);
                 weatherController.cityController.clear();
               },
               style: ElevatedButton.styleFrom(
