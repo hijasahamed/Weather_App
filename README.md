@@ -16,7 +16,7 @@ flutter_dotenv: For managing environment variables like API keys.
 
 📦 Installation
 Clone this repository:
-git clone https://github.com/your-username/weather_app.git
+git clone https://github.com/hijasahamed/Weather_App
 Navigate to the project directory:
 cd weather_app
 Install dependencies:
