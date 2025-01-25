@@ -55,7 +55,7 @@ class WeatherController extends GetxController {
 
   Widget buildWeatherInfo() {
     if (isLoading.value) {
-      return Center(child: CircularProgressIndicator());
+      return Center(child: CircularProgressIndicator(color: Colors.white,));
     }
 
     if (errorMessage.isNotEmpty) {
