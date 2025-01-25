@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import 'package:weather_app/view/screens/weather_screen.dart';
 
 
-void main() {
+void main(){
   runApp(WeatherApp());
 }
 
